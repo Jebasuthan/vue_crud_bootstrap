@@ -134,7 +134,7 @@ export default {
         return
       }
       this.$bvModal.hide('addNewEmployee')
-      this.$store.dispatch('updatelistEmployee', { employee: this.user })
+      this.$store.dispatch('updatelistEmployee', { employee: this.user }) // dispatch store action
     },
     resetForm () {
       this.user = {}

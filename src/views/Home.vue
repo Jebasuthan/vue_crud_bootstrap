@@ -234,7 +234,7 @@ export default {
       })
         .then((value) => {
           if (value) {
-            this.$store.dispatch('deleteStoreEmployee', { employee: employee })
+            this.$store.dispatch('deleteStoreEmployee', { employee: employee }) // dispatch store action
           }
         })
         .catch((err) => {
