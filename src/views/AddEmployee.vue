@@ -134,8 +134,7 @@ export default {
         return
       }
       this.$bvModal.hide('addNewEmployee')
-      this.$root.$emit('add-employee-details', this.user)
-      return true
+      this.$store.dispatch('updatelistEmployee', { employee: this.user })
     },
     resetForm () {
       this.user = {}

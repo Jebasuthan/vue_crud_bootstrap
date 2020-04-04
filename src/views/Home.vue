@@ -15,10 +15,6 @@
               <b-form-select v-model="sortBy" id="sortBySelect" :options="sortOptions" class="w-75">
                 <template v-slot:first>
                   <option value="">Select</option>
-                  <option value="id">Employee ID</option>
-                  <option value="name">Name</option>
-                  <option value="email">Email</option>
-                  <option value="contact">Contact</option>
                 </template>
               </b-form-select>
               <b-form-select v-model="sortDesc" size="sm" :disabled="!sortBy" class="w-25">
@@ -112,7 +108,7 @@
     <div style="float:right;margin:10px;">
       <b-button size="sm" @click="addEmployee">Add New Employee</b-button>
     </div>
-    <b-table striped hover :items="items" responsive="sm" :fields="fields" show-empty
+    <b-table striped hover :items="bindListEmployees" responsive="sm" :fields="fields" show-empty
       :current-page="currentPage"
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
@@ -160,7 +156,6 @@ export default {
   },
   data () {
     return {
-      items: [],
       fields: [
         {
           key: 'id', label: 'Employee ID', sortable: true, sortDirection: 'desc'
@@ -169,10 +164,10 @@ export default {
           key: 'name', label: 'Employee Name', sortable: true, class: 'text-center'
         },
         {
-          key: 'email', label: 'Email'
+          key: 'email', label: 'Email', sortable: true
         },
         {
-          key: 'contact', label: 'Contact'
+          key: 'contact', label: 'Contact', sortable: true
         },
         {
           key: 'action', label: 'Actions'
@@ -197,35 +192,25 @@ export default {
         .map(f => {
           return { text: f.label, value: f.key }
         })
+    },
+    bindListEmployees () {
+      return this.$store.state.listEmployee
+    }
+  },
+  watch: {
+    bindListEmployees: {
+      deep: true,
+      handler: function (list) {
+        this.totalRows = list.length
+      }
     }
   },
   created () {
     this.loadlistEmployees()
   },
-  mounted () {
-    this.$root.$on('add-employee-details', (data) => {
-      if (!data.isEdit) {
-        this.items.push(data)
-        localStorage.setItem('employeeList', JSON.stringify(this.items))
-      } else {
-        const editEmp = this.items.find((item) => { return item.id === data.id })
-        editEmp.name = data.name
-        editEmp.email = data.email
-        editEmp.contact = data.contact
-        localStorage.setItem('employeeList', JSON.stringify(this.items))
-      }
-      this.loadlistEmployees()
-    })
-  },
   methods: {
     loadlistEmployees () {
-      var listItems = localStorage.getItem('employeeList')
-      if (listItems) {
-        this.items = JSON.parse(listItems)
-      } else {
-        this.items = []
-      }
-      this.totalRows = this.items.length
+      this.totalRows = this.$store.state.listEmployee.length
     },
     addEmployee () {
       this.$root.$emit('add-employee', {})
@@ -249,8 +234,7 @@ export default {
       })
         .then((value) => {
           if (value) {
-            this.items.splice(employee.index, 1)
-            localStorage.setItem('employeeList', JSON.stringify(this.items))
+            this.$store.dispatch('deleteStoreEmployee', { employee: employee })
           }
         })
         .catch((err) => {
