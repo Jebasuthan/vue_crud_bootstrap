@@ -15,11 +15,13 @@
           <td>{{employee.employee_age}}</td>
           <td>{{employee.employee_salary}}</td>
         </tr>
+        <tr v-if="listEmployee && listEmployee.length === 0">
+          <td colspan="4" class="text-center">No Records Found</td>
+        </tr>
       </table>
       <loading :active.sync="isLoading"
         :can-cancel="true"
-        :on-cancel="onCancel"
-        :is-full-page="fullPage"></loading>
+        :is-full-page="true"></loading>
     </div>
   </div>
 </template>
@@ -47,7 +49,9 @@ export default {
     loadEmployees () {
       this.isLoading = true
       employeeService.getListEmployees().then((response) => {
-        this.listEmployee = response.data
+        if (response.data) {
+          this.listEmployee = response.data
+        }
         setTimeout(() => {
           this.isLoading = false
         }, 500)

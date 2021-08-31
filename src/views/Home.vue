@@ -237,10 +237,6 @@ export default {
             this.$store.dispatch('deleteStoreEmployee', { employee: employee }) // dispatch store action
           }
         })
-        .catch((err) => {
-          console.log('err', err)
-          // An error occurred
-        })
     },
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering

@@ -9,12 +9,10 @@ function getListEmployees () {
   return axios.get('http://dummy.restapiexample.com/api/v1/employees')
     .then(function (response) {
       // handle success
-      console.log(response)
       return response.data
     })
     .catch(function (error) {
       // handle error
-      console.log(error)
       return error
     })
 }
