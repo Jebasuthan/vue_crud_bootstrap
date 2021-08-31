@@ -26,14 +26,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build
+    - name: Install and Build 🔧
+      run: |
+        npm install
+        npm run build
     
     - name: Deploy to gh-pages
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
-        token: ${{ secrets.ACCESS_TOKEN }}
         branch: gh-pages
         folder: build
         single-commit: true
