@@ -28,15 +28,13 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build
-    - run: npm test
     
     - name: Deploy to gh-pages
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-      uses: JamesIves/github-pages-deploy-action@releases/v4
+      uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
         token: ${{ secrets.ACCESS_TOKEN }}
         branch: gh-pages
-        folder: docs
         single-commit: true
         clean: true
 
