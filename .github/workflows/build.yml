@@ -35,6 +35,7 @@ jobs:
       with:
         token: ${{ secrets.ACCESS_TOKEN }}
         branch: gh-pages
+        folder: docs
         single-commit: true
         clean: true
 
