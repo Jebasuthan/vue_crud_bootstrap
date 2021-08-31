@@ -28,6 +28,8 @@ jobs:
       with:
         branch: gh-pages
         folder: dist
+        single-commit: true
+        clean: true
 
     
     
