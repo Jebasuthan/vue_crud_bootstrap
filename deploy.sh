@@ -20,6 +20,6 @@ git commit -m 'deploy'
 # git push -f git@github.com:Jebasuthan.github.io main
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:Jebasuthan/vue_crud_bootstrap.git main:gh-pages
+git push -f git@github.com:jebasuthan/vue_crud_bootstrap.git main:gh-pages
 
 cd -
