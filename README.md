@@ -34,3 +34,6 @@ npm run serve
 ![image](https://user-images.githubusercontent.com/3702438/81673768-c113d200-9469-11ea-9dce-36e0d9d2d3c0.png)
 ### Edit List Item
 ![image](https://user-images.githubusercontent.com/3702438/81674249-8199b580-946a-11ea-9369-06d2d5ac83d8.png)
+### Bootstrap Table and Bootstrap pagination with REST API call
+![image](https://user-images.githubusercontent.com/3702438/145662060-e48bb87e-7db4-444b-a3c0-6135b16bb9a3.png)
+
