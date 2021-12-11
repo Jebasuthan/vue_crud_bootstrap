@@ -2,7 +2,8 @@ import axios from 'axios'
 
 export const employeeService = {
   getListEmployees,
-  getEmployeeById
+  getEmployeeById,
+  getListPassengers
 }
 
 function getListEmployees () {
@@ -15,6 +16,12 @@ function getListEmployees () {
       // handle error
       return error
     })
+}
+
+function getListPassengers (params) {
+  return axios.get(`https://api.instantwebtools.net/v1/passenger?${params}`, {})
+    .then((response) => Promise.resolve(response.data))
+    .catch((error) => Promise.reject(error.response))
 }
 
 function getEmployeeById (Id) {
